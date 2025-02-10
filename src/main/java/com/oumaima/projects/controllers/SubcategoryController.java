@@ -1,4 +1,3 @@
-
 package com.oumaima.projects.controllers;
 
 import java.util.List;
@@ -14,21 +13,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.oumaima.projects.entity.Category;
-import com.oumaima.projects.repository.CategoryRepository;
-
+import com.oumaima.projects.entity.Subcategory;
+import com.oumaima.projects.repository.SubcategoryRepository;
 
 @Controller
 @RestController
-@RequestMapping("/category")
-public class CategoryController {
-
+@RequestMapping("/subcategory")
+public class SubcategoryController {
+	
 	@Autowired
-	private CategoryRepository categoryrepo ;
+	private SubcategoryRepository subcategoryrepo ;
 	
 	@PostMapping("/add")
-	public String ajouter(@RequestBody Category cat) {
-		this.categoryrepo.save(cat);
+	public String ajouter(@RequestBody Subcategory cat) {
+		this.subcategoryrepo.save(cat);
 		return "enregistrer avec succées";
 	}
 	
@@ -39,24 +37,24 @@ public class CategoryController {
 	 */
 	
 	@GetMapping("/afficher")
-	public List<Category>afficher(){
-		 return this.categoryrepo.findAll();
+	public List<Subcategory>afficher(){
+		 return this.subcategoryrepo.findAll();
 	}
 
 @DeleteMapping("/delete/{id}")
 public String delete(@PathVariable Long id) {
-	 Category u = this.categoryrepo.findById(id).get();
-	 this.categoryrepo.delete(u);
+	Subcategory u = this.subcategoryrepo.findById(id).get();
+	 this.subcategoryrepo.delete(u);
 	 return "category supprimer avec succées";
 }
 
 @PutMapping("/update/{id}")
-public Category update(@PathVariable Long id,  @RequestBody Category category) {
-	Category c = this.categoryrepo.findById(id).get();
+public Subcategory update(@PathVariable Long id,  @RequestBody Subcategory subcategory) {
+	Subcategory c = this.subcategoryrepo.findById(id).get();
 	 if(c !=null) { 
-		 category.setId(id);
-	 this.categoryrepo.save(c);
-	 return categoryrepo.saveAndFlush(category);
+		 subcategory.setId(id);
+	 this.subcategoryrepo.save(c);
+	 return subcategoryrepo.saveAndFlush(subcategory);
 
 }
 	 else
@@ -66,3 +64,6 @@ public Category update(@PathVariable Long id,  @RequestBody Category category) {
 
 }
 }
+
+
+
